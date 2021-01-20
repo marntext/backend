@@ -11,8 +11,11 @@ class CategorySerializer(serializers.ModelSerializer):
             "post_count"
         )
 
+
 class CommentSerializer(serializers.ModelSerializer):
+
     commenter = serializers.StringRelatedField()
+
     class Meta:
         model = Comment
         fields = (
@@ -22,10 +25,12 @@ class CommentSerializer(serializers.ModelSerializer):
             "content"
         )
 
+
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
     author = serializers.StringRelatedField()
     category = serializers.StringRelatedField()
+
     class Meta:
         model = Post
         fields = (
@@ -44,9 +49,6 @@ class PostSerializer(serializers.ModelSerializer):
             "view_count",
             "comments"
         )
-
-
-
 
 
 class LikeSerializer(serializers.ModelSerializer):
