@@ -15,6 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     commenter = serializers.StringRelatedField()
+    post = serializers.StringRelatedField()
 
     class Meta:
         model = Comment
@@ -22,7 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "commenter",
             "post",
             "time_stamp",
-            "content"
+            "content",
         )
 
 
@@ -43,11 +44,40 @@ class PostSerializer(serializers.ModelSerializer):
             "author",
             "author_avatar",
             "status",
+            "is_liked",
             "slug",
             "comment_count",
             "like_count",
             "view_count",
             "comments"
+        )
+
+        # extra_kwargs = {
+        #     "publish_date": {"read_only": True},
+        #     "author": {"read_only": True},
+        #     "is_liked": {"read_only": True},
+        #     "slug": {"read_only": True},
+        #     "comment_count": {"read_only": True},
+        #     "like_count": {"read_only": True},
+        #     "view_count": {"read_only": True},
+        #     "comments": {"read_only": True},
+        # }
+
+
+class PostEditSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField()
+    category = serializers.StringRelatedField()
+
+    class Meta:
+        model = Post
+        fields = (
+            "title",
+            "content",
+            "image_URL",
+            "category",
+            "update_date",
+            "author_avatar",
+            "status",
         )
 
 

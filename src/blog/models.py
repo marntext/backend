@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import json
 
+from django.db.models.fields.related import RelatedField
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -33,6 +34,7 @@ class Post(models.Model):
     author_avatar = models.CharField(
         max_length=220, default="https://www.kindpng.com/picc/m/105-1055656_account-user-profile-avatar-avatar-user-profile-icon.png")
     status = models.CharField(max_length=10, choices=OPTIONS, default="draft")
+    is_liked = models.BooleanField(default=False)
     slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self):
